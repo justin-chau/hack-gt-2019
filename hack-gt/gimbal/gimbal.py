@@ -4,7 +4,7 @@ import serial
 
 context = zmq.Context()
 footage_socket = context.socket(zmq.PUB)
-footage_socket.connect('tcp://localhost:5555')
+footage_socket.connect('tcp://192.168.0.100:5555')
 
 with serial.Serial('/dev/ttyACM0', 9600, timeout=1) as ser:
     while(True): 
