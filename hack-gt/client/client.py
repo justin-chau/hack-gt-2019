@@ -1,4 +1,3 @@
-import cv2
 import zmq
 import base64
 import numpy as np
@@ -11,13 +10,9 @@ footage_socket.setsockopt_string(zmq.SUBSCRIBE, str(''))
 while True:
     try:
         frame = footage_socket.recv_string()
-        img = base64.b64decode(frame)
-        npimg = np.fromstring(img, dtype=np.uint8)
-        source = cv2.imdecode(npimg, 1)
-        cv2.imshow("image", source)
-        cv2.waitKey(1)
+        line = base64.b64decode(frame)
+        print(line)
 
     except KeyboardInterrupt:
-        cv2.destroyAllWindows()
-        print ("\n\nBye bye\n")
+        print ("Ending connection...")
         break
