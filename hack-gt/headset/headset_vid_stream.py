@@ -18,9 +18,9 @@ while True:
 		break
 
 	# do something with frame here
-
+	decimg = cv2.imdecode(frame, 1)
 	# Show output window
-	cv2.imshow("Output Frame", frame)
+	cv2.imshow("Output Frame", decimg)
 
 	key = cv2.waitKey(1) & 0xFF
 	# check for 'q' key-press
