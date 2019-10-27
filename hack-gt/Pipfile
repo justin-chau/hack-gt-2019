@@ -11,6 +11,8 @@ zmq = "*"
 imutils = "*"
 pyserial = "*"
 rplidar = "*"
+vidgear = "*"
+mss = "*"
 
 [requires]
 python_version = "3.6"

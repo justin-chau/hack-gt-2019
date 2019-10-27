@@ -21,7 +21,7 @@ with serial.Serial('/dev/ttyUSB0', 9600, timeout=1) as ser:
             yaw_pitch=yaw_pitch.replace(r,"")
 
         try:
-            print(yaw_pitch)
+            # print(yaw_pitch)
             socket.send_string(yaw_pitch)
 
         except KeyboardInterrupt:
