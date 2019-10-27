@@ -46,9 +46,9 @@ while True:
         (grabbed, frame) = stream.read()
         frame = cv2.resize(frame, (resolution_width, resolution_height))
 
-        if(angle < min_angle or angle > max_angle):
+        if(angle > 0 and angle < min_angle * 2):
                 distances[angle] = distance
-
+                print(angle)
         for angle in distances:
             cv2.circle(frame,(int(angle*degree_pixels),int(resolution_height/2)),3,(0,255,0),5)
         
