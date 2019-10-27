@@ -6,6 +6,7 @@ import time
 import cv2
 from imutils.video import VideoStream
 import imagezmq
+from rplidar import RPLidar
 
 print('Connecting to webcam...')
 
@@ -48,8 +49,7 @@ while True:
 
         for angle in distances:
             cv2.circle(frame,(angle,int(resolution_height/2)),3,(0,255,0),5)
-            cv2.imshow('frame', frame)
-
+        
         if not grabbed:
             break
 
