@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, '../imagezmq')  # imagezmq.py is in ../imagezmq
+sys.path.insert(0, '../imagezmq')
 
 import socket
 import time
@@ -7,15 +7,19 @@ import cv2
 from imutils.video import VideoStream
 import imagezmq
 
-stream = cv2.VideoCapture(2) 
+print('Connecting to webcam...')
 
-# use either of the formats below to specifiy address of display computer
-# sender = imagezmq.ImageSender(connect_to='tcp://jeff-macbook:5555')
+stream = cv2.VideoCapture(2)
+
+print('Connecting to headset - streaming using ZMQ...')
+
+# The IP address below is the IP address of the headset computer.
 sender = imagezmq.ImageSender(connect_to='tcp://192.168.0.101:5556')
 
-time.sleep(2.0)  # allow camera sensor to warm up
-jpeg_quality = 35  # 0 to 100, higher is better quality, 95 is cv2 default
-while True:  # send images as stream until Ctrl-C
+time.sleep(2.0)
+jpeg_quality = 35 #0 to 100
+
+while True:
     (grabbed, frame) = stream.read()
 
     if not grabbed:

@@ -5,14 +5,15 @@ import serial
 #Reads gyro data from IMU and streams it back to the gimbal.
 
 
-print('Connecting to gimbal...')
+print('Connecting to gimbal using ZMQ...')
 context = zmq.Context()
 socket = context.socket(zmq.PUB)
-socket.connect('tcp://192.168.0.100:5555')
+socket.bind('tcp://*:5555')
 
 print('Publishing headset IMU data...')
 
 with serial.Serial('/dev/ttyUSB0', 9600, timeout=1) as ser:
+    print('Connecting to Arduino Nano using serial...')
     while(True):
         b = ser.read_until()
         yaw_pitch = str(b)
@@ -25,5 +26,5 @@ with serial.Serial('/dev/ttyUSB0', 9600, timeout=1) as ser:
             socket.send_string(yaw_pitch)
 
         except KeyboardInterrupt:
-            print ("Ending IMU stream.")
+            print ("Ending IMU stream...")
             break
