@@ -9,7 +9,7 @@ import imagezmq
 
 print('Connecting to webcam...')
 
-stream = cv2.VideoCapture(4)
+stream = cv2.VideoCapture(2)
 
 print("Connecting to lidar...")
 lidar = RPLidar('/dev/ttyUSB0')
