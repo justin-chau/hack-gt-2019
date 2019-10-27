@@ -15,7 +15,7 @@ with serial.Serial('/dev/ttyACM0', 9600, timeout=1) as ser:
         try:
             yaw_pitch = socket.recv_string()
             print(yaw_pitch)
-            ser.write(base64.b64encode(yaw_pitch))
+            ser.write(bytes(yaw_pitch, 'utf-8'))
 
         except KeyboardInterrupt:
             print ("Ending connection...")
