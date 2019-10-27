@@ -9,7 +9,7 @@ import imagezmq
 
 print('Connecting to webcam...')
 
-stream = cv2.VideoCapture(2)
+stream = cv2.VideoCapture(4)
 
 print('Connecting to headset - streaming using ZMQ...')
 
