@@ -1,19 +1,21 @@
 import zmq
 import base64
-import serial
+import numpy as np
+import pyserial
+
+#Receives gyro data from the client and sends commands to the Teensy.
 
 context = zmq.Context()
-footage_socket = context.socket(zmq.PUB)
-footage_socket.connect('tcp://192.168.0.100:5555')
+footage_socket = context.socket(zmq.SUB)
+footage_socket.bind('tcp://*:5555')
+footage_socket.setsockopt_string(zmq.SUBSCRIBE, str(''))
 
-with serial.Serial('/dev/ttyACM0', 9600, timeout=1) as ser:
-    while(True): 
-        line = ser.read_until() 
+while True:
+    try:
+        frame = footage_socket.recv_string()
+        line = base64.b64decode(frame)
         print(line)
 
-        try:
-            footage_socket.send_string(base64.b64encode(line).decode('ascii'))
-
-        except KeyboardInterrupt:
-            print ("Ending IMU stream.")
-            break
+    except KeyboardInterrupt:
+        print ("Ending connection...")
+        break

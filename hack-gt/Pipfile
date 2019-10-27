@@ -10,6 +10,7 @@ opencv-contrib-python = "*"
 zmq = "*"
 imutils = "*"
 pyserial = "*"
+rplidar = "*"
 
 [requires]
 python_version = "3.6"

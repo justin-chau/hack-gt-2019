@@ -1,18 +1,22 @@
 import zmq
 import base64
-import numpy as np
+import serial
+from rplidar import RPlidar
+
+#Reads gyro data from IMU and streams it back to the gimbal.
 
 context = zmq.Context()
-footage_socket = context.socket(zmq.SUB)
-footage_socket.bind('tcp://*:5555')
-footage_socket.setsockopt_string(zmq.SUBSCRIBE, str(''))
+footage_socket = context.socket(zmq.PUB)
+footage_socket.connect('tcp://192.168.0.100:5555')
 
-while True:
-    try:
-        frame = footage_socket.recv_string()
-        line = base64.b64decode(frame)
+with serial.Serial('/dev/ttyACM0', 9600, timeout=1) as ser:
+    while(True): 
+        line = ser.read_until() 
         print(line)
 
-    except KeyboardInterrupt:
-        print ("Ending connection...")
-        break
+        try:
+            footage_socket.send_string(base64.b64encode(line).decode('ascii'))
+
+        except KeyboardInterrupt:
+            print ("Ending IMU stream.")
+            break

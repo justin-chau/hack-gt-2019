@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3d834d3d759f77f3fc73f2433693231e2ebd5af3e8057eb9103225ff03d6a0e6"
+            "sha256": "2fb26e592ca7f7468a37360aee6ef6fdde78e0a0f06623e9112074391c3478cd"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -119,6 +119,13 @@
                 "sha256:fa4bad0d1d173dee3e8ef3c3eb6b2bb6c723fc7a661eeecc1ecb2fa99860dd45"
             ],
             "version": "==18.1.0"
+        },
+        "rplidar": {
+            "hashes": [
+                "sha256:2799f85feb1d46943cdeb0ad5dc5fe8482e6ab1b20ae6367668b608fb76552e4"
+            ],
+            "index": "pypi",
+            "version": "==0.9.2"
         },
         "zmq": {
             "hashes": [
