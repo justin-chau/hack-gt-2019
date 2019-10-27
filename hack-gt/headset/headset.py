@@ -4,11 +4,15 @@ import serial
 
 #Reads gyro data from IMU and streams it back to the gimbal.
 
+
+print('Connecting to gimbal...')
 context = zmq.Context()
 socket = context.socket(zmq.PUB)
 socket.connect('tcp://192.168.0.100:5555')
 
-with serial.Serial('/dev/ttyACM0', 9600, timeout=1) as ser:
+print('Publishing headset IMU data...')
+
+with serial.Serial('/dev/ttyUSB0', 9600, timeout=1) as ser:
     while(True):
         b = ser.read_until()
         yaw_pitch = str(b)
@@ -17,7 +21,7 @@ with serial.Serial('/dev/ttyACM0', 9600, timeout=1) as ser:
             yaw_pitch=yaw_pitch.replace(r,"")
 
         try:
-            # print(yaw_pitch)
+            print(yaw_pitch)
             socket.send_string(yaw_pitch)
 
         except KeyboardInterrupt:
