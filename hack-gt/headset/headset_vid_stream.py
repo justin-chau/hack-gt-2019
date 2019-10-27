@@ -21,7 +21,7 @@ while True:
 
 	# Show output window
 	
-	cv2.imshow("Output Frame", cv2.resize(1080,1920))
+	cv2.imshow("Output Frame", cv2.resize(frame,(1920,1080)))
 
 	key = cv2.waitKey(1) & 0xFF
 	# check for 'q' key-press
