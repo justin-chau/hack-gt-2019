@@ -32,7 +32,7 @@ while True:
             ret_val, frame = cam.read()
             frame = cv2.resize(frame, (resolution_width, resolution_height))
 
-            if(angle > min_angle and angle < max_angle):
+            if(angle < min_angle or angle > max_angle):
                 distances[angle] = distance
 
             for angle in distances:
