@@ -25,7 +25,7 @@ while True:
 		encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
 		result, encimg = cv2.imencode('.jpg', frame, encode_param)
 		# send frame to server
-		server.send(cv2.resize(encimg, (160,120)))
+		server.send(cv2.resize(result, (160,120)))
 	
 	except KeyboardInterrupt:
 		#break the infinite loop
