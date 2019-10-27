@@ -8,7 +8,7 @@ import serial
 print('Connecting to gimbal...')
 context = zmq.Context()
 socket = context.socket(zmq.PUB)
-socket.connect('tcp://192.168.0.101:5555')
+socket.connect('tcp://192.168.0.100:5555')
 
 print('Publishing headset IMU data...')
 
