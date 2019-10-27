@@ -14,6 +14,7 @@ stream = cv2.VideoCapture(2)
 
 print("Connecting to lidar...")
 lidar = RPLidar('/dev/ttyUSB0')
+print("")
 print("-------------------LiDAR-------------------")
 print(lidar.get_info())
 print("-------------------------------------------")
@@ -31,15 +32,16 @@ jpeg_quality = 35 #0 to 100
 
 resolution_width = 640
 resolution_height = int(0.75*resolution_width)
-field_of_view = max_angle-min_angle
+field_of_view = 2 *min_angle
 degree_pixels = resolution_width/field_of_view
 
 distances = {}
 
 while True:
     for i, measurement in enumerate(lidar.iter_measurments()):
-        angle = int(measurement[2])
-        distance = measurement[3]
+        angle = int(measurement[2]) + 39
+        angle = angle % 360
+        distance = int(measurement[3])
 
         (grabbed, frame) = stream.read()
         frame = cv2.resize(frame, (resolution_width, resolution_height))
@@ -48,8 +50,10 @@ while True:
                 distances[angle] = distance
 
         for angle in distances:
-            cv2.circle(frame,(angle,int(resolution_height/2)),3,(0,255,0),5)
+            cv2.circle(frame,(int(angle*degree_pixels),int(resolution_height/2)),3,(0,255,0),5)
         
+        cv2.imshow('frame', frame)
+
         if not grabbed:
             break
 
