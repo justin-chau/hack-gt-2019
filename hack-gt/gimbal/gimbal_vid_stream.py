@@ -2,7 +2,7 @@
 from vidgear.gears import NetGear
 import cv2
 
-stream = cv2.VideoCapture(4) #Open any video stream
+stream = cv2.VideoCapture(2) #Open any video stream
 
 options = {'flag' : 0, 'copy' : False, 'track' : False}
 
@@ -13,6 +13,7 @@ server = NetGear(address = '192.168.0.101', port = '5454', protocol = 'tcp',  pa
 while True:
 	try: 
 		(grabbed, frame) = stream.read()
+		
 		# read frames
 
 		# check if frame is not grabbed
@@ -23,7 +24,7 @@ while True:
 		# do something with frame here
 
 		# send frame to server
-		server.send(frame)
+		server.send(cv2.resize(frame, (160,120)))
 	
 	except KeyboardInterrupt:
 		#break the infinite loop
